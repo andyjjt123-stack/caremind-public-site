@@ -81,7 +81,7 @@
                 <caption>Android 權限與對應用途</caption>
                 <thead><tr><th scope="col">權限／能力</th><th scope="col">用途</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">相機</th><td>鏡頭端取得現場即時影像。家屬端配對掃碼由 Google Play services 提供，不需本 App 為掃碼要求相機權限。</td></tr>
+                  <tr><th scope="row">相機</th><td>鏡頭端取得現場即時影像。新版家屬端的一般配對掃描器也使用 App 相機權限；較舊版本或部分安全確認流程使用 Google Play services 掃描器，該流程不需 App 另為掃碼要求相機權限。</td></tr>
                   <tr><th scope="row">麥克風</th><td>鏡頭端取得現場即時聲音；家屬端在按住說話時傳送語音，放開後停止該次對講。</td></tr>
                   <tr><th scope="row">通知及前景服務</th><td>顯示鏡頭端正在分享的狀態與停止操作，並維持依使用者操作，或依已啟用設定且符合啟動條件開始的分享。啟用開機選項時，恢復通知引導操作人員解鎖並點入可見鏡頭畫面；也可自行開啟鏡頭頁，依仍有效的恢復提示操作。通知及自動啟動均仍受 Android 版本與權限設定影響。</td></tr>
                   <tr><th scope="row">網路、Wi-Fi 狀態與喚醒鎖</th><td>建立及維持配對、信令與即時影音連線，掌握網路狀態並維持分享工作。</td></tr>
@@ -137,8 +137,8 @@
 <p>新備援功能另行保留鏡頭／家屬公開身分、原配對綁定、完整家屬授權，以及阻擋舊授權與路由重用的狀態；這份獨立本機資料的保護及清除邊界見第 6 至 8 節。</p>
 <p>App 不要求建立雲端使用者帳號，也不要求以 Email 或 Google 帳號登入。裝置配對是連線與存取機制，不等同建立雲端帳號。</p>
             <h3>掃碼及客服資料</h3>
-            <p>家屬端使用 Google code scanner 掃描配對 QR Code，並啟用自動縮放。依 Google 官方說明，掃碼影像與結果在裝置上處理，Google 不保存該掃碼影像與結果；但 SDK 仍會向 Google 傳送診斷及使用資訊。</p>
-            <p>這類資訊包括裝置與系統、App 套件與版本、裝置或安裝識別資料、效能、API 設定及事件／錯誤。啟用自動縮放時，還包含掃描工作階段識別、縮放變動與條碼預測框資訊。依 Google 的說明，診斷及使用資訊用於服務維護、改善與濫用偵測。這不等同完全沒有第三方 SDK 或資料蒐集。</p>
+            <p>新版家屬端的一般配對掃描器使用 Android 相機與 ZXing，在裝置記憶體中解讀 QR，不啟用自動縮放；掃描影像不由此掃描功能保存或上傳。解讀後的配對資料依本政策其他章節處理。較舊版本或部分安全確認流程仍使用 Google code scanner：依 Google 官方說明，該流程的掃碼影像與結果在裝置上處理，Google 不保存該掃碼影像與結果；但 SDK 仍會向 Google 傳送診斷及使用資訊。</p>
+            <p>使用 Google 掃描器時，這類資訊包括裝置與系統、App 套件與版本、裝置或安裝識別資料、效能、API 設定及事件／錯誤。較舊曾啟用自動縮放的版本，另包含掃描工作階段識別、縮放變動與條碼預測框資訊。依 Google 的說明，診斷及使用資訊用於服務維護、改善與濫用偵測。這不等同完全沒有第三方 SDK 或資料蒐集。</p>
             <p>若您寄信至客服信箱，我們及提供郵件服務的 Google Gmail 會處理您主動提供的電子郵件地址、信件內容及相關郵件資料，用於回覆與處理您的請求。</p>
             <p>EB工作室保留處理客服及隱私請求所需的必要往來。收到郵件資料刪除請求後，我們會由人員檢視並處理，說明可處理的範圍、限制與結果。</p>
             <h3 id="test-ads">封測測試廣告</h3>
@@ -166,7 +166,7 @@
               <li><strong>EB工作室及主要信令服務：</strong>處理配對、驗證、連線協商、裝置狀態，以及在撤銷紀錄有效期間阻擋舊房間重新註冊所需資料，並處理客服與資料請求。</li>
               <li><strong>HTTPS 備援服務及加密備份接收端：</strong>處理、保存或備份配對生命週期資料，用於維持配對狀態及復原。這些資料的保留與刪除範圍另見第 7 節。</li>
               <li><strong>部署與連線服務提供者：</strong>主機、網路代理，以及依部署設定使用的 STUN 或 TURN 服務，可能處理網路位址、連線及運作紀錄；TURN 如有使用，會中繼 WebRTC 加密的即時封包。</li>
-              <li><strong>Google：</strong>Google Play services／code scanner 處理掃碼及相關診斷、使用資訊；Google Mobile Ads／AdMob 處理廣告請求與 SDK 資料；UMP 處理隱私選擇及訊息所需資料；Gmail 處理您寄送客服的郵件。相關第三方處理受其適用條款及隱私政策規範。</li>
+              <li><strong>Google：</strong>使用 Google 掃描器的流程，由 Google Play services／code scanner 處理掃碼及相關診斷、使用資訊；Google Mobile Ads／AdMob 處理廣告請求與 SDK 資料；UMP 處理隱私選擇及訊息所需資料；Gmail 處理您寄送客服的郵件。相關第三方處理受其適用條款及隱私政策規範。</li>
             </ul>
             <p>我們使用上述資料來提供您選擇的功能、確認配對與存取、維持連線及服務安全、處理撤銷並回覆請求。廣告資料用於提供封測測試廣告、分析及防止詐欺；UMP 資料用於管理適用的隱私選擇與廣告請求條件。</p>
             <p>您可參閱 <a href="https://developers.google.com/ml-kit/vision/barcode-scanning/code-scanner">Google code scanner 說明</a>、<a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit Android 資料揭露</a>、<a href="https://developers.google.com/ml-kit/terms">ML Kit 條款與隱私說明</a>與 <a href="https://policies.google.com/privacy?hl=zh-TW">Google 隱私權政策</a>。</p>
