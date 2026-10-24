@@ -34,7 +34,7 @@
         <dl>
           <div><dt>適用 App</dt><dd>守心 基礎版（App 內標示：守心 免費版）</dd></div>
           <div><dt>提供者／開發者</dt><dd>EB工作室</dd></div>
-          <div><dt>更新日</dt><dd><time datetime="2026-10-19">2026 年 10 月 19 日</time></dd></div>
+          <div><dt>更新日</dt><dd><time datetime="2026-10-25">2026 年 10 月 25 日</time></dd></div>
           <div><dt>生效日</dt><dd><time datetime="2026-10-10">2026 年 10 月 10 日</time></dd></div>
         </dl>
       </div>
@@ -100,6 +100,9 @@
             <p>免費版信令服務用於配對與建立連線，不接收二進位影音串流。服務會處理房間及裝置識別、憑證或其雜湊、工作階段、驗證封套，以及 SDP、ICE 等協商資料。這些資料可能包含建立連線所需的網路端點與 IP 資訊。</p>
             <p>服務也會處理部分鏡頭裝置狀態，例如電池溫度、測量時間與 Android 熱狀態，用於連線及裝置運作狀態的呈現。因此，不能將信令服務描述成完全看不到連線資料。</p>
             <p>支援原操作整合三主機的版本，會在既有分享、普通配對 QR／完整私人連結及家屬確認流程中，準備三個信令節點。信令准入與實際影音存取是不同檢查；更新 App、取得邀請或完成信令准入授權（grant），本身不代表已通過影音驗證。較早流程產生的資料及既有配對也須依各自狀態處理，不能保證所有舊配對僅更新 App 就具備三主機備援能力。</p>
+            <h3>家屬手機的廠牌與型號提示</h3>
+            <p>在支援此提示的版本中，家屬手機通過必要授權並正常建立影音連線後，會經由既有 TLS 保護及訊息簽章及完整性驗證的信令，將手機自述的廠牌與型號傳給鏡頭端，協助辨識家屬手機。信令中繼可處理這項文字，它不是僅兩端裝置能解讀的端到端加密資料。這項提示不收集手機序號、IMEI 或帳號資料；自述內容不代表已驗證的裝置身分，也不會作為配對、授權或觀看的依據。沒有有效提示時顯示未知，不猜測型號。</p>
+            <p>鏡頭端在 App 私人本機設定中，依配對範圍、鏡頭、手機指紋與授權識別區分並保存最多 64 筆提示。提示可保留至被新提示取代、因筆數上限淘汰，或隨清除 App 資料移除；一般移除鏡頭或撤銷授權不保證刪除既存提示，但不會將舊提示套用到不同授權。此提示的資料範圍與下述鏡頭准入所用的裝置配額雜湊不同。</p>
             <h3>主要信令與備援配對狀態</h3>
             <p>主要信令服務處理活躍房間與連線狀態，並在撤銷後保存限時的記憶體撤銷紀錄。其房間閒置到期與撤銷紀錄的保留方式，分別見第 7 節。</p>
             <p>兩個備援服務另以 SQLite 保留配對生命週期資料，包括房間識別雜湊、憑證雜湊、來源網路識別雜湊、狀態與到期時間。來源網路識別以 SHA-256 處理，該欄位不是明文 IP；雜湊仍可能用於辨識或連結紀錄，不能視為完全匿名，也不代表其他網路系統不處理 IP 資訊。</p>
@@ -172,10 +175,10 @@
             <p>您可參閱 <a href="https://developers.google.com/ml-kit/vision/barcode-scanning/code-scanner">Google code scanner 說明</a>、<a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit Android 資料揭露</a>、<a href="https://developers.google.com/ml-kit/terms">ML Kit 條款與隱私說明</a>與 <a href="https://policies.google.com/privacy?hl=zh-TW">Google 隱私權政策</a>。</p>
           <h3>第一方三主機信令節點</h3>
 <p>為在原分享、普通 QR／完整私人連結及家屬確認流程中，提供鏡頭准入、簽章邀請驗證、家屬持有證明、信令 grant、裝置配額與濫用控制、硬體金鑰證明驗證、狀態同步、連線發現、撤銷及信令轉送，EB工作室管理或安排運作的下列三個第一方節點會處理上述必要資料：</p>
-<div class="privacy-table-wrap" tabindex="0" role="region" aria-label="新增備援資料說明表"><table class="privacy-table"><thead><tr><th scope="col">節點</th><th scope="col">指定 HTTPS 入口</th></tr></thead><tbody>
-<tr><th scope="row">Hina，主要節點</th><td><code>https://hina-20220907ol.tailf1d7d8.ts.net:8443</code></td></tr>
-<tr><th scope="row">andyjjt-hp，備援節點</th><td><code>https://andyjjt-hp.tailf1d7d8.ts.net:8443</code></td></tr>
-<tr><th scope="row">andynewhp，備援節點</th><td><code>https://andynewhp.tailf1d7d8.ts.net:8443</code></td></tr>
+<div class="privacy-table-wrap" tabindex="0" role="region" aria-label="新增備援資料說明表"><table class="privacy-table"><thead><tr><th scope="col">第一方節點</th><th scope="col">用途</th></tr></thead><tbody>
+<tr><th scope="row">主要連線服務</th><td>處理必要的配對、授權、狀態同步及信令連線資料。</td></tr>
+<tr><th scope="row">第一備援服務</th><td>處理必要的配對、授權與同步資料，並提供備援連線。</td></tr>
+<tr><th scope="row">第二備援服務</th><td>處理必要的配對、授權與同步資料，並提供備援連線。</td></tr>
 </tbody></table></div>
 <p>選擇分享、顯示普通 QR／複製完整私人連結、提交鏡頭准入證明、家屬確認或使用三主機路由時，必要的公開身分、配額雜湊、硬體證明、簽章邀請、nonce、範圍與有效期、家屬持有證明、待處理申請、授權版本、信令 grant、完整授權設定及在線／路由狀態可傳至多個已設定節點。節點核對目前授權世代、相同邀請範圍、有效期與家屬金鑰，供信令一致性、拒絕舊邀請及連線復原使用；這些處理不以家屬已看到影音為前提。資料不只在當時承載影音協商的節點處理，待機節點也可接收必要狀態；節點切換不會自動把影音分享給多支手機，也不取代原媒體驗證。</p>
 <p>三個第一方節點亦以准入及授權資料庫保存必要狀態，並在受限權限的本機復原備份中保留恢復副本，用於部署一致性及服務復原。這些副本與既有配對生命週期的加密備份不同；不能將新協定未接入舊備份接收機制，理解成新版資料沒有備份。第 7、8 節分別說明其保留及刪除界線。</p>
