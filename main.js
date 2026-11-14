@@ -6,7 +6,7 @@ mobileMenu?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => { mobileMenu.open = false; });
 });
 
-const publicUrl = 'https://caremind-pro.s.gy/';
+const publicUrl = 'https://jiabanwin.s.gy/';
 const copyButton = document.querySelector('#copy-site-link');
 const copyStatus = document.querySelector('#copy-site-status');
 copyButton?.addEventListener('click', async () => {
